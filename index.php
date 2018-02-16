@@ -1,14 +1,38 @@
 <?php
 
+// Getting parameters
+
+  // page number
 if (isset($_GET['p']) && is_numeric($_GET['p'])) {
   $p = $_GET['p'];
 } else {
   $p = '1';
 }
 
-$access_token = '5cc9b44d2ede130604768726b88ab83dc64a7624df52fa92c7ba08227df5a3df';
+  // queried MC
+    // supported MCs
+    // 1552 ==> Morocco
+    // 1606 ==> Brazil
+    // 1609 ==> Egypt
+    // 1622 ==> turkey
+$mcs = [
+  "morocco" => "1552",
+  "brazil" => "1606",
+  "egypt" => "1609",
+  "turkey" => "1622"
+];
+if (isset($_GET['mc']) && is_string($_GET['mc']) && array_key_exists($_GET['mc'], $mcs)) {
+  $q_mc = $_GET['mc'];
+} else {
+  $q_mc = 'brazil';
+}
 
-$url = 'https://gis-api.aiesec.org/v2/opportunities.json?access_token='.$access_token.'&filters[programmes][]=1&filters[home_mcs][]=1552&page='.$p.'&filters[last_interaction][from]=2017-01-30&filters[earliest_start_date]=2018-2-8';
+// api call
+$access_token = '3cc7a2dd52568c2bcc586c9d425e33e5e340d62eea1ee9de541c58eb8791328f';
+
+$mc_filter = $mcs[$q_mc];
+
+$url = 'https://gis-api.aiesec.org/v2/opportunities/search.json?access_token='.$access_token.'&filters[programmes][]=1&filters[home_mcs][]='.$mc_filter.'&page='.$p.'&filters[last_interaction][from]=2017-01-30&filters[earliest_start_date]=2018-2-16';
 
 // $json = CallAPI('GET', $url);
 $json = CallAPIget($url);
@@ -34,7 +58,21 @@ if (isset($data['error']) && isset($data['error']) == 'page is invalid') {
 </head>
 <body>
 
-<h1 class="text-center heading">All Opportunities From Morocco!</h1>
+<h1 class="text-center heading">Opportunities From <strong><?php echo ucfirst($q_mc); ?></strong>!</h1>
+
+<h4 class="text-center heading">See also from 
+  <div class="dropdown show">
+    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    This List
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <a class="dropdown-item" href="http://localhost/aiesec/?mc=brazil">Brazil</a>
+      <a class="dropdown-item" href="http://localhost/aiesec/?mc=egypt">Egypt</a>
+      <a class="dropdown-item" href="http://localhost/aiesec/?mc=turkey">Turkey</a>
+    </div>
+  </div>
+</h4>
 
 <div class="container">
   <div class="row">
@@ -152,22 +190,27 @@ function CallAPI($method, $url, $data = false) {
       $tp = 1;
     }
   ?>
+
   <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
-      <li class="page-item<?=$activep?>"><a class="page-link" href="./?p=<?= $cp - 1; ?>">Previous</a></li>
+      <li class="page-item<?=$activep?>"><a class="page-link" href="./?p=<?= $cp - 1; ?>&mc=<?=$q_mc?>">Previous</a></li>
       <?php
         for ($i = 1; $i <= $tp; $i++) {
           $activetab = '';
           if ($i == $cp) {
             $activetab = ' active';
           }
-          $link = '<li class="page-item'.$activetab.'"><a class="page-link" href="./?p='.$i.'">'.$i.'</a></li>';
+          $link = '<li class="page-item'.$activetab.'"><a class="page-link" href="./?p='.$i.'&mc='.$q_mc.'">'.$i.'</a></li>';
           echo $link;
         }
       ?>
-      <li class="page-item<?=$activen?>"><a class="page-link" href="./?p=<?= $data['paging']['current_page'] + 1; ?>">Next</a></li>
+      <li class="page-item<?=$activen?>"><a class="page-link" href="./?p=<?=$cp + 1;?>&mc=<?=$q_mc?>">Next</a></li>
     </ul>
   </nav>
 </div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
 </html>
