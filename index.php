@@ -1,216 +1,169 @@
 <?php
-
-// Getting parameters
-
-  // page number
-if (isset($_GET['p']) && is_numeric($_GET['p'])) {
-  $p = $_GET['p'];
-} else {
-  $p = '1';
-}
-
-  // queried MC
-    // supported MCs
-    // 1552 ==> Morocco
-    // 1606 ==> Brazil
-    // 1609 ==> Egypt
-    // 1622 ==> turkey
-$mcs = [
-  "morocco" => "1552",
-  "brazil" => "1606",
-  "egypt" => "1609",
-  "turkey" => "1622"
-];
-if (isset($_GET['mc']) && is_string($_GET['mc']) && array_key_exists($_GET['mc'], $mcs)) {
-  $q_mc = $_GET['mc'];
-} else {
-  $q_mc = 'brazil';
-}
-
-// api call
-$access_token = '3cc7a2dd52568c2bcc586c9d425e33e5e340d62eea1ee9de541c58eb8791328f';
-
-$mc_filter = $mcs[$q_mc];
-
-$url = 'https://gis-api.aiesec.org/v2/opportunities/search.json?access_token='.$access_token.'&filters[programmes][]=1&filters[home_mcs][]='.$mc_filter.'&page='.$p.'&filters[last_interaction][from]=2017-01-30&filters[earliest_start_date]=2018-2-16';
-
-// $json = CallAPI('GET', $url);
-$json = CallAPIget($url);
-$data = json_decode($json, true);
-
-if (isset($data['error']) && isset($data['error']) == 'page is invalid') {
-  header("Location: /aiesec/?p=1");
-  exit();
-}
-
+include('./elts/head.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="icon" type="image/x-png" href="./img/favicon.png">
-  <title>AIESEC API</title>
-</head>
-<body>
-
-<h1 class="text-center heading">Opportunities From <strong><?php echo ucfirst($q_mc); ?></strong>!</h1>
-
-<h4 class="text-center heading">See also from 
-  <div class="dropdown show">
-    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    This List
-    </a>
-
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <a class="dropdown-item" href="http://localhost/aiesec/?mc=brazil">Brazil</a>
-      <a class="dropdown-item" href="http://localhost/aiesec/?mc=egypt">Egypt</a>
-      <a class="dropdown-item" href="http://localhost/aiesec/?mc=turkey">Turkey</a>
-    </div>
-  </div>
-</h4>
-
-<div class="container">
-  <div class="row">
+<body id="top">
 
 <?php
+include('./elts/navbar.php');
+include('./elts/header.php');
+?>
 
-if (isset($data['data'])) {
-  foreach ($data['data'] as $key => $value) {
-    $opp_id = 'https://aiesec.org/opportunity/' . $value['id'];
-    $opp_image = $value['cover_photo_urls'];
-    $opp_duration = $value['duration'];
-    $opp_title = $value['title'];
+	<section class="section section-light section-what" id="section-what">
+		<div class="section-heading text-center"><h2>What is AIESEC?</h2></div>
+		<div class="section-body container">
+			<div class="videoWrapper">
+				<iframe width="560" height="312" src="https://www.youtube.com/embed/IDJQOJCFPng?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			</div>
+		</div>
+		<div class="section-action text-center"><a href="https://www.aiesec.org/about-us" target="_blank" class="btn btn-primary btn-lg btnp">Learn More</a></div>
+	</section>
 
-    $opp_location = explode(",", $value['location']);
-    $opp_location = $opp_location[0];
+	<section class="section section-dark section-numbers" id="section-numbers">
+		<div class="section-heading text-center"><h2>AIESEC In Numbers</h2></div>
+		<div class="section-body container text-center">
+			<div class="row">
+				<div class="col-sm-4"><div class="strong">+3.600</div> Entities</div>
+				<div class="col-sm-4"><div class="strong">+120</div> Contries <br>& Territories</div>
+				<div class="col-sm-4"><div class="strong">+41.500</div> Members <br>Worldwide</div>
+			</div>
+		</div>
+	</section>
 
-    // Some locations are not set, use city instead
-    if ($opp_location == "") {
-      $opp_location = explode(",", $value['city']);
-      $opp_location = $opp_location[0];
-    }
+	<section class="section section-light section-prods" id="section-prods">
+		<div class="section-heading text-center"><h2>How Would You Like To Develop Yourself?</h2></div>
+		<div class="section-body container">
+			<div class="row">
+				<div class="col-sm-12 col-md-4 d-flex flex-row">
+					<div class="ia text-center">
+						<img src="https://lh3.googleusercontent.com/6EI6UA2snatxHQSdPuSakJDPagtlaR0xhsLyym-zjbEm70Fxmib-kdbKhHGwmd_ss9Q1IZaq_nW_H9kR56653aYZg0IrjEco5dEcYNuK5XF-p6qcCrK_E3VHfPP13rywj9oiXEGEq3uUIsHzDEZ8qdqruNFj2tiibmN2bXukGdfN9pUP3Bqykdf60rDIXu5iAEp0-f9vG0BInJ70Kjf2b9Sab8pwt59sSHBBF2AwVT_jHOzEj8GdKbxaDUONdaovWFq9_NgnH__q6F3CAXDSQAmNzyynRA_MmN00rRFDLoXxRC3-3M3dcl4vgpiXQWCKGzCBvGjYCkk-g8BZKnFO1lRpMI6kF62kGmE8Ma_KF7Qs8CQA3i7MDRDMkL2GVwQvt1cQjvyEKaBTZNfjMRCHl7TXmNE4WmLJYtlW8OXo_k_hdjlesEA-lnbcTSjX7YD_EZHaFZRNA5TIjVqVy3qjhQmaChjbq_CjEOc3MSWH6hDIQJlKufonbDaALa5SGoqr-bY0jXD0QR6CKp1oXzMgZLEbo5BRnqHwIPA02DgTNc32rVN3zIDnHrUANJs=w1920-h984" alt="Global Volunteer" class="i-image">
+						<a href="https://www.aiesec.org/global-volunteer" class="btn btn-sm action act-gv" target="_blank">Read More</a>
+					</div>
+					<p class="desc">Ambitious enough to believe you can make a positive impact in our world? Well, we believe you can, through volunteering towards the UN Global Goals!</p>
+				</div>
+				<div class="col-sm-12 col-md-4 d-flex flex-row">
+					<div class="ia text-center">
+						<img src="https://lh3.googleusercontent.com/e7MijLzuWnax16LcKnS0i404Atix4YVcfRsHyyUb01E3tOKM9KnpG73CD7fjJt5mE3-tGjpugpvvLnbCZp25gsoCpYV98HLJA0tPIkNihzEQJgpZGXk6mAvwcFjhBK2tE_Qvo8mPo0kq8ngfiFFbfkMAUfqLM2GTSqVFan9KlkZSZFTvJ19nhxMgg2gdneZpSjinMz-hmut4B8_b8WlSuIA0tCiLMn-rbKDDMw92hJvy4TrATmp20OiNFjiNIe247yL63zAmfdwLyylLviWzJd63Rprb6BXumkVQ0fOacBrKufK6tz00Gm4Gc_KD25xqBIXWsi5Nh7GsD6bLx0ytcOaIuTvFdvJ3lT5VQ8uCoMOO058iaGsQtTkg5-kWJ7B0DJJ2c9MB3a3NHgq6GyRpVIs4IGgsNb0O35UDDlh_HS8rcu-pbGoKl13SHlkYhUryEdFPGHtCQkIJpheND0f8E-S2_PgUxszF-9c9j_ciCFr-ESi89hItRipS1u1CEXygNN1pA4ke2OspoKhjZxE7uy49qS3N-e1JDQVqZEyN2EBpla6YrNe_qprFaEc=w1920-h984" alt="Global Talent" class="i-image">
+						<a href="https://www.aiesec.org/global-talent" class="btn btn-sm action act-gt" target="_blank">Read More</a>
+					</div>
+					<p class="desc">Searching for the next opportunity to level yourself up and gain professional experience? Differentiate yourself through an international internship.</p>
+				</div>
+				<div class="col-sm-12 col-md-4 d-flex flex-row">
+					<div class="ia text-center">
+						<img src="https://lh3.googleusercontent.com/0vN3DLlmNrlmJrfEmX-SmhKrVcpD6xIh1BtBcMwjvGPeBkjfOxouECY10XmUXP48ER6wjDNYAoMSrkLAdVidbmsjp1TwsK4x7Y4bEWgRK5ZLzZHKEEVe0zdrrQ-9a52FiscOIaXSAzEfKtc3zXyVwGxAr-zlDh0TTz_soC6BtNTV5jAElk4I9kgPNZnVyzdaY3pzKXYaM2_nrc7GptRbL3rFv3a7pxoVgZHagVbkySB1Omu59KEX0JCE0eQPM8fB-khaLEYvmyGmG3wNsQy_ZpBSD8VY8pYq-43hJsJIyj9kfGAPU7wSz-hJ52Dh-DwiXkz6roRjHzh8-T6mQfXz58ru_nv_M_5FRb-82kFNJOQVsUGZ1ZfXMvGjJkkRnjr7XQ82EhjjpSnHJIzFHke7v26L177NzdUbNlhSHSVn2-2fVRdwWd8oGJClfUgpBB-FQniJIB6P-_tWF5XdHDBMDF8MXasqQ_mg0QZkjjsl0HOy_TvValWGd1CDjnVcjGB-Q9GUk5w_32So2zNSeCIXAGXHuNCgVp-8EeWurnVNJU_1bL0zYrn0EJH8EvI=w1920-h984" alt="Global Entrepreneur" class="i-image">
+						<a href="https://www.aiesec.org/global-entrepreneur" class="btn btn-sm action act-ge" target="_blank">Read More</a>
+					</div>
+					<p class="desc">Does a dynamic, fast-paced work environment excite you? Begin your entrepreneurial journey with an internship at a startup!</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    $code = '
-    <div class="col-sm-12 col-md-6 col-lg-4">
-      <div class="card">
-        <div class="card-img-top">
-          <img class="" src="'.$opp_image.'" alt="'.$opp_title.'">
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">'.$opp_title.'</h5>
-          <div class="card-text">
-            <p>'.$opp_duration . ' WEEK</p>
-            <p><strong>City:</strong> '.$opp_location . '</p>
-          </div>
-          <a href="'. $opp_id .'" target="_blank" class="btn btn-primary">Apply</a>
-        </div>
-      </div>
-    </div>
-    ';
+	<section class="section section-dark section-LDQ" id="section-LDQ">
+		<div class="section-heading text-center"><h2>Leadership Developement Qualities</h2></div>
+		<div class="section-body container text-center">
+			<div class="row">
+				<div class="col-sm-6 col-md-3">
+					<div class="image">
+						<img src="https://daks2k3a4ib2z.cloudfront.net/57c77a2af8cc395247a9ac53/57e0fa61b9750aa96fc289aa_LDM-01.png" alt="EMPOWERING OTHERS" width="120" height="120">
+					</div>
+					<div class="quality">EMPOWERING<br>OTHERS</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="image">
+						<img src="https://daks2k3a4ib2z.cloudfront.net/57c77a2af8cc395247a9ac53/57e0fa79b9750aa96fc289c9_LDM-03.png" alt="SOLUTION ORIENTED" width="120" height="120">
+					</div>
+					<div class="quality">SOLUTION<br>ORIENTED</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="image">
+						<img src="https://daks2k3a4ib2z.cloudfront.net/57c77a2af8cc395247a9ac53/57e0f87d4bfd281659d20ec4_LDM-05.png" alt="SELF AWARE" width="120" height="120">
+					</div>
+					<div class="quality">SELF<br>AWARE</div>
+				</div>
+				<div class="col-sm-6 col-md-3">
+					<div class="image">
+						<img src="https://daks2k3a4ib2z.cloudfront.net/57c77a2af8cc395247a9ac53/57e0fa6fc73be37b63d3a78e_LDM-07.png" alt="WORLD CITIZEN" width="120" height="120">
+					</div>
+					<div class="quality">WORLD<br>CITIZEN</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    echo $code;  
-  }
-} elseif (isset($data['status']['code']) && $data['status']['code'] == 401) {
-  echo 'Refresh access token';
-} elseif (isset($data['error'])) {
-  echo $data['error'];
-} else {
-  echo var_dump($data);
-}
+	<section class="section section-light section-testimenials">
+		<div class="section-heading text-center">
+			<h2>Stories</h2>
+		</div>
+		<div class="section-body container">
+			<div id="carouselIndicators" class="carousel slide" data-ride="carousel" data-interval="0" data-pause="true">
+				<ol class="carousel-indicators">
+					<li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+					<li data-target="#carouselIndicators" data-slide-to="1"></li>
+					<li data-target="#carouselIndicators" data-slide-to="2"></li>
+					<li data-target="#carouselIndicators" data-slide-to="3"></li>
+					<li data-target="#carouselIndicators" data-slide-to="4"></li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img class="d-block w-100" src="./IMG/EP01.png" alt="First slide">
+						<div class="carousel-caption testimonial-content d-flex flex-column">
+							<h4 class="t-name">Yasser Elidrissi</h4>
+							<p class="testimonial">“Far behind the seas, lias a powerful kind of meditation, that of hearing nothing you can understand.”</p>
+							<div class="p-image mt-auto"><img src="https://cdn-expa.aiesec.org/icons-v2/gv-logo.png" alt="Global Volunteer"></div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" src="./IMG/EP02.png" alt="Second slide">
+						<div class="carousel-caption testimonial-content d-flex flex-column">
+							<h4 class="t-name">Rabab Abdoul</h4>
+							<p class="testimonial">“AIESEC provided me with once in a lifetime experience with this International Internship Program. I gained invaluable experiences while meeting intersting and loving people whom I will xherish for the rest of my life. It's a perfect opportunity for those out there who are looking for a work experience abroad and enjoy what the rest of the world has to offer.”</p>
+							<div class="p-image mt-auto"><img src="https://cdn-expa.aiesec.org/icons-v2/gt-logo.png" alt="Global Talent"></div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" src="./IMG/EP03.png" alt="Third slide">
+						<div class="carousel-caption testimonial-content d-flex flex-column">
+							<h4 class="t-name">Eman Echchefaa</h4>
+							<p class="testimonial">“This experience simply reshaped me. It made me rethink all my choices in life, and helped me discover what i really want. It also fulfilled my soul with love and hope through my teaching experience with kids and orphans.”</p>
+							<div class="p-image mt-auto"><img src="https://cdn-expa.aiesec.org/icons-v2/gv-logo.png" alt="Global Volunteer"></div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" src="./IMG/EP04.png" alt="Fourth slide">
+						<div class="carousel-caption testimonial-content d-flex flex-column">
+							<h4 class="t-name">Raji Ali Hamad</h4>
+							<p class="testimonial">“Education is the passport to the future, for tomorrow belongs to those who prepare for it today. Malcom X”</p>
+							<div class="p-image mt-auto"><img src="https://cdn-expa.aiesec.org/icons-v2/gv-logo.png" alt="Global Volunteer"></div>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" src="./IMG/EP05.jpg" alt="Fifth slide">
+						<div class="carousel-caption testimonial-content d-flex flex-column">
+							<h4 class="t-name">Hiba Benaboud</h4>
+							<p class="testimonial">“I learned to value diversity that promotes personal growth. 'Don't become too narrow. Live fully. Meet all kinds of people. You will learn something from everyone. Follow what you feel in your heart.'”</p>
+							<div class="p-image mt-auto"><img src="https://cdn-expa.aiesec.org/icons-v2/gv-logo.png" alt="Global Volunteer"></div>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+	</section>
 
-function CallAPIget($url) {
-  $curl = curl_init();
-  
-  curl_setopt($curl, CURLOPT_URL, $url);
-  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
-  $result = curl_exec($curl);
 
-  curl_close($curl);
+<?php
+include('./elts/footer.php');
+include('./elts/inc_js.php');
+?>
 
-  return $result;
-}
-
-function CallAPI($method, $url, $data = false) {
-    
-  $curl = curl_init();
-
-  switch ($method) {
-    case "POST":
-      curl_setopt($curl, CURLOPT_POST, 1);
-
-      if ($data)
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-
-      break;
-    case "PUT":
-      curl_setopt($curl, CURLOPT_PUT, 1);
-      break;
-    default:
-      if ($data)
-        $url = sprintf("%s?%s", $url, http_build_query($data));
-  }
-
-  // Optional Authentication:
-  curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-  curl_setopt($curl, CURLOPT_USERPWD, "username:password");
-
-  curl_setopt($curl, CURLOPT_URL, $url);
-  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-
-  $result = curl_exec($curl);
-
-  curl_close($curl);
-
-  return $result;
-}
-
-?> 
-
-  </div>
-  <?php
-    if (isset($data['paging']['current_page'])) {
-      $cp = $data['paging']['current_page'];
-      $tp = $data['paging']['total_pages'];
-      $activep = '';
-      $activen = '';
-      if ($cp == 1) {
-        $activep = ' disabled';
-      }
-      if ($cp == $tp) {
-        $activen = ' disabled';
-      }
-    } else {
-      $cp = 2;
-      $tp = 1;
-    }
-  ?>
-
-  <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-      <li class="page-item<?=$activep?>"><a class="page-link" href="./?p=<?= $cp - 1; ?>&mc=<?=$q_mc?>">Previous</a></li>
-      <?php
-        for ($i = 1; $i <= $tp; $i++) {
-          $activetab = '';
-          if ($i == $cp) {
-            $activetab = ' active';
-          }
-          $link = '<li class="page-item'.$activetab.'"><a class="page-link" href="./?p='.$i.'&mc='.$q_mc.'">'.$i.'</a></li>';
-          echo $link;
-        }
-      ?>
-      <li class="page-item<?=$activen?>"><a class="page-link" href="./?p=<?=$cp + 1;?>&mc=<?=$q_mc?>">Next</a></li>
-    </ul>
-  </nav>
-</div>
-
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
 </html>
