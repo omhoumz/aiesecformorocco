@@ -1,6 +1,6 @@
 <?php
-include('./incs/funcs.php');
-include('./incs/access_token.php');
+include('../incs/funcs.php');
+include('../incs/access_token.php');
 
 // Getting parameters
   // page number
@@ -39,7 +39,7 @@ $json = CallAPIget($url);
 $data = json_decode($json, true);
 
 if (isset($data['error']) && isset($data['error']) == 'page is invalid') {
-  header("Location: /aiesec/opportunities.php?p=1&mc=brazil");
+  header("Location: /aiesec/p/opportunities.php?p=1&mc=brazil");
   exit();
 }
 
@@ -49,11 +49,11 @@ $opp_count = $data['paging']['total_items'];
 ?>
 
 <?php
-include('./elts/head.php');
+include('../elts/head.php');
 ?>
 <body id="top">
 <?php
-include('./elts/navbar.php');
+include('../elts/navbar.php');
 ?>
 
 
@@ -183,10 +183,10 @@ include('./elts/navbar.php');
   </section>
 
 <?php
-include('./elts/footer.php');
+include('../elts/footer.php');
 ?>
 <?php
-include('./elts/inc_js.php');
+include('../elts/inc_js.php');
 ?>
 
 </body>
