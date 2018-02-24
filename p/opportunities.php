@@ -57,7 +57,7 @@ include('../elts/navbar.php');
 ?>
 
 
-	<section class="section section-light section-opportunities">
+	<section class="section section-light section-opportunities hm">
 		<div class="section-heading text-center">
       <h2>Opportunities From 
         <strong>
