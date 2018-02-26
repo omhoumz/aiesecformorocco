@@ -1,12 +1,11 @@
-	<header class="header">
+<header class="header header-section">
+	<div class="inner-header">
 		<div class="darken-bg"></div>
 		<div class="headerImage">
 			<div class="container">
 				<h1 class="text-shadow">AIESEC for Morocco</h1>
 				<p class="text-shadow">Activate your leadership by going on an experience with AIESEC. We provide you with the opportunity to live a shared responsibility for the world and equip you with the tools to shape it for a better future.</p>
 
-				<!--a href="https://www.aiesec.org/search" class="btn btn-primary btn-lg shadow btnp" target="_blank">Explore</a-->
-				<!-- Button trigger modal -->
 				<button type="button" class="btn btn-primary btn-lg shadow btnp" data-toggle="modal" data-target="#MCModel">Explore</button>
 
 				<a href="#section-what" class="btn btn-outline-light btn-lg shadow btnp">What is AIESEC?</a>
@@ -23,9 +22,10 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<a href="./opportunities.php?p=1&mc=brazil" class="btn btn-info">Brazil</a>
-						<a href="./opportunities.php?p=1&mc=egypt" class="btn btn-info">Egypt</a>
-						<a href="./opportunities.php?p=1&mc=turkey" class="btn btn-info">Turkey</a>
+						<a href="./opportunities.php?p=1&mc=brazil" class="btn btn-info"><span class="badge badge-light badge-flag br"> </span> Brazil</a>
+						<a href="./opportunities.php?p=1&mc=egypt" class="btn btn-info"><span class="badge badge-light badge-flag eg"> </span> Egypt</a>
+						<a href="./opportunities.php?p=1&mc=turkey" class="btn btn-info"><span class="badge badge-light badge-flag tr"> </span> Turkey</a>
+						<a href="./opportunities.php?p=1&mc=india" class="btn btn-info"><span class="badge badge-light badge-flag in"> </span> India</a>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
@@ -33,4 +33,5 @@
 				</div>
 			</div>
 		</div>
-	</header>
+	</div>
+</header>

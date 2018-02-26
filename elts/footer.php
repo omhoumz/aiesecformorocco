@@ -6,7 +6,7 @@
           <div class="title">About</div>
           <li><a target="_blank" href="#!">About us</a></li>
           <li><a target="_blank" href="http://blog.aiesec.org/category/press/">Press</a></li>
-          <li><a target="_blank" href="#!">Blog</a></li>
+          <li><a target="_blank" href="https://www.facebook.com/HumansOfAIESECOfficial/">Blog</a></li>
           <li><a target="_blank" href="https://issuu.com/aiesecinternational/docs/annual_report_-_2016-2017">Annual Report</a></li>
         </ul>
       </div>

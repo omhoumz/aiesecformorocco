@@ -19,13 +19,13 @@ include('../elts/navbar.php');
 
     <?php
     // Read JSON file
-    $json = file_get_contents('../data/qs.json');
+    $json_faqs = file_get_contents('../data/faqs.json');
 
     //Decode JSON
-    $json_data = json_decode($json, true);
+    $faqs_data = json_decode($json_faqs, true);
 
-    if (isset($json_data)) {
-      foreach ($json_data as $k => $v) {
+    if (isset($faqs_data)) {
+      foreach ($faqs_data as $k => $v) {
         $question = $v['q'];
         $answer = $v['a'];
         $b = '';

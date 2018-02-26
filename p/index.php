@@ -91,7 +91,7 @@ include('../elts/header.php');
 		</div>
 	</section>
 
-	<section class="section section-light section-testimenials">
+	<section class="section section-light section-testimonials">
 		<div class="section-heading text-center">
 			<h2>Stories</h2>
 		</div>
@@ -105,8 +105,33 @@ include('../elts/header.php');
 					<li data-target="#carouselIndicators" data-slide-to="4"></li>
 				</ol>
 				<div class="carousel-inner">
+					<?php
+						// Read JSON file
+						$json_testimonials = file_get_contents('../data/testimonials.json');
+
+						//Decode JSON
+						$testimonials_data = json_decode($json_testimonials, true);
+
+						if (isset($testimonials_data)) {
+							foreach ($testimonials_data as $k => $v) {
+								$a = '';
+								if ($k == 0) {
+									$a = ' avtive';
+								}
+								$div_code = '<div class="carousel-item'.$a.'">
+									<img class="d-block w-100" src="../IMG/EP0'.($k + 1).'.jpg" alt="'.$v['t_name'].'">
+									<div class="carousel-caption testimonial-content d-flex flex-column">
+										<h4 class="t-name">'.$v['t_name'].'</h4>
+										<p class="testimonial">“'.htmlspecialchars($v['t_content'], ENT_QUOTES).'”</p>
+										<div class="p-image mt-auto"><img src="https://cdn-expa.aiesec.org/icons-v2/'.$v['t_program'].'-logo.png" alt="'.$v['t_p_long'].'"></div>
+									</div>
+								</div>';
+								// echo $div_code;
+							}
+						}
+					?>
 					<div class="carousel-item active">
-						<img class="d-block w-100" src="../IMG/EP01.png" alt="First slide">
+						<img class="d-block w-100" src="./IMG/EP01.jpg" alt="First slide">
 						<div class="carousel-caption testimonial-content d-flex flex-column">
 							<h4 class="t-name">Yasser Elidrissi</h4>
 							<p class="testimonial">“Far behind the seas, lias a powerful kind of meditation, that of hearing nothing you can understand.”</p>
@@ -114,7 +139,7 @@ include('../elts/header.php');
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img class="d-block w-100" src="../IMG/EP02.png" alt="Second slide">
+						<img class="d-block w-100" src="./IMG/EP02.jpg" alt="Second slide">
 						<div class="carousel-caption testimonial-content d-flex flex-column">
 							<h4 class="t-name">Rabab Abdoul</h4>
 							<p class="testimonial">“AIESEC provided me with once in a lifetime experience with this International Internship Program. I gained invaluable experiences while meeting intersting and loving people whom I will xherish for the rest of my life. It's a perfect opportunity for those out there who are looking for a work experience abroad and enjoy what the rest of the world has to offer.”</p>
@@ -122,7 +147,7 @@ include('../elts/header.php');
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img class="d-block w-100" src="../IMG/EP03.png" alt="Third slide">
+						<img class="d-block w-100" src="./IMG/EP03.jpg" alt="Third slide">
 						<div class="carousel-caption testimonial-content d-flex flex-column">
 							<h4 class="t-name">Eman Echchefaa</h4>
 							<p class="testimonial">“This experience simply reshaped me. It made me rethink all my choices in life, and helped me discover what i really want. It also fulfilled my soul with love and hope through my teaching experience with kids and orphans.”</p>
@@ -130,7 +155,7 @@ include('../elts/header.php');
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img class="d-block w-100" src="../IMG/EP04.png" alt="Fourth slide">
+						<img class="d-block w-100" src="./IMG/EP04.jpg" alt="Fourth slide">
 						<div class="carousel-caption testimonial-content d-flex flex-column">
 							<h4 class="t-name">Raji Ali Hamad</h4>
 							<p class="testimonial">“Education is the passport to the future, for tomorrow belongs to those who prepare for it today. Malcom X”</p>
@@ -138,7 +163,7 @@ include('../elts/header.php');
 						</div>
 					</div>
 					<div class="carousel-item">
-						<img class="d-block w-100" src="../IMG/EP05.jpg" alt="Fifth slide">
+						<img class="d-block w-100" src="./IMG/EP05.jpg" alt="Fifth slide">
 						<div class="carousel-caption testimonial-content d-flex flex-column">
 							<h4 class="t-name">Hiba Benaboud</h4>
 							<p class="testimonial">“I learned to value diversity that promotes personal growth. 'Don't become too narrow. Live fully. Meet all kinds of people. You will learn something from everyone. Follow what you feel in your heart.'”</p>

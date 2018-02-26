@@ -1,6 +1,7 @@
 <?php
 include('../incs/funcs.php');
 include('../incs/access_token.php');
+include('../incs/mcs.php');
 
 // Getting parameters
   // page number
@@ -10,18 +11,6 @@ if (isset($_GET['p']) && is_numeric($_GET['p'])) {
   $p = '1';
 }
 
-  // queried MC
-    // supported MCs
-    // 1552 ==> Morocco
-    // 1606 ==> Brazil
-    // 1609 ==> Egypt
-    // 1622 ==> turkey
-$mcs = [
-  "morocco" => "1552",
-  "brazil" => "1606",
-  "egypt" => "1609",
-  "turkey" => "1622"
-];
 if (isset($_GET['mc']) && is_string($_GET['mc']) && (array_key_exists($_GET['mc'], $mcs) || in_array($_GET['mc'], $mcs)) ) {
   $q_mc = $_GET['mc'];
 } else {
@@ -54,6 +43,8 @@ include('../elts/head.php');
 <body id="top">
 <?php
 include('../elts/navbar.php');
+$_GET['p-heading'] = 'Your experience starts here ...';
+include('../elts/small-header.php');
 ?>
 
 

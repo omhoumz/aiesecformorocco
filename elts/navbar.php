@@ -9,12 +9,17 @@
 		</button>
 		<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a href="#top" class="nav-link">Home</a></li>
-				<li class="nav-item"><a href="https://www.facebook.com/HumansOfAIESECOfficial/" target="_blank" class="nav-link">Blog</a></li>
-				<li class="nav-item"><a href="./faq.php"class="nav-link">FAQ</a></li>
-				<li class="nav-item"><a href="https://yallamorocco.000webhostapp.com/" class="nav-link" target="_blank">Yalla Morocco</a></li>
 				<li class="nav-item">
-					<a href="https://www.aiesec.org/search" target="_blank" class="nav-link">More Opportunities</a>
+					<a href="./partners.php" class="nav-link">Partners</a>
+				</li>
+				<li class="nav-item">
+					<a href="./faq.php"class="nav-link">FAQ</a>
+				</li>
+				<li class="nav-item button-explore">
+					<a href="https://www.aiesec.org/search" target="_blank" class="nav-link btn btn-light btn-sm">Explore More</a>
+				</li>
+				<li class="nav-item">
+					<a href="https://yallamorocco.000webhostapp.com/" class="nav-link" target="_blank">Yalla Morocco</a>
 				</li>
 			</ul>
 		</div>

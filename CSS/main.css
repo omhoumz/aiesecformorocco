@@ -1,10 +1,10 @@
 body {
-	background-color: #fefefe;
+	background-color: #f8f8f8;
 	font-family: 'Lato', sans-serif;
 	margin: 0;
 	padding: 0;
 }
-.shadow {box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.3);}
+.shadow {box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);}
 .text-shadow {text-shadow: 0 4px 4px rgba(0, 0, 0, 0.32);}
 .btn {
 	cursor: pointer;
@@ -18,37 +18,49 @@ body {
 	margin-bottom: 10px;
 	font-size: 20px;
 }
-.header {
-	background: url(../IMG/header_image.jpg) no-repeat center center;
+.header-section {
+	position: relative;
+	margin-bottom: -75px;
+}
+.header .inner-header {
+	background: url(../IMG/header_image.jpg) no-repeat center center;	
+}
+.small-header .inner-header {
+	background: url(../IMG/partner-cover.jpg) no-repeat center center;
+}
+.header-section .inner-header {
 	background-attachment: fixed;
 	-webkit-background-size: cover;
 	background-size: cover;
+	height: calc(100% - 75px);
+	position: relative;
+}
+.header.header-section {
 	height: 100vh;
-	margin-top: -57px;
+}
+.small-header.header-section {
+	height: 40vh;
+}
+.small-header .heading {
+	text-align: center;
 }
 .darken-bg {
 	background-color: #000;
-	opacity: 0.7;
+	opacity: 0.67;
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	position: absolute;
 }
-.headerImage h1, .headerImage p {
+.headerImage {
 	color: white;
 }
 .headerImage h1 {
 	font-size: 6rem;
 	font-weight: 500;
 }
-.navbar {
-	background-color: #037EF3;
-}
-.navbar a {
-	color: #fff;
-}
 .headerImage {
+	height: 100%;
 	position: relative;
-	height: 100vh;
 	display: flex;
 	align-items: center;
 }
@@ -62,6 +74,22 @@ body {
 .headerImage .btn {
 	margin-right: 40px;
 	margin-bottom: 20px;
+}
+.navbar {
+	background-color: #037EF3;
+}
+.navbar-dark .navbar-nav .nav-link {
+	color: #fff;
+}
+.navbar-dark .navbar-nav .nav-link.btn-light {
+	color: #037EF3;
+	padding-top: 0.3rem;
+	padding-bottom: 0.3rem;
+}
+.navbar .nav-item.button-explore {
+	top: 0.3rem;
+	position: relative;
+	margin: 0 0.5rem;
 }
 .section {
 	padding: 120px 0;
@@ -165,7 +193,6 @@ body {
 	box-shadow: 0 0 0 0.2rem rgba(45, 190, 153, 0.5019607843137255);
 }
 
-
 .section-LDQ .image {
 	margin-bottom: 15px;
 }
@@ -196,9 +223,8 @@ body {
 	line-height: 1.3;
 	text-indent: -6px;
 }
-
 /* Bootstrap carousel edit */
-.section-testimenials .carousel-caption {
+.section-testimonials .carousel-caption {
 	background-color: rgba(255, 255, 255, 0.95);
 	color: black;
 	top: 15%;
@@ -249,7 +275,6 @@ body {
     display: inline-block;
     margin-right: 20px;
 }
-
 /* Code snippet from https://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php */
 .videoWrapper {
 	position: relative;
@@ -265,9 +290,18 @@ body {
 	height: 100%;
 }
 /* End Snippet */
-
 /* Media Queries */
 @media (max-width: 991px) {
+	.small-header .heading {
+		font-size: 3rem;
+	}
+	.navbar .nav-item.button-explore {
+		margin: 0.4rem 0;
+    display: inherit;
+	}
+	.navbar .nav-item.button-explore a {
+		padding: 0.5rem;
+	}
 	.headerImage h1 {
 		font-size: 4rem;
 	}
@@ -287,21 +321,23 @@ body {
 	.testimonial-content .t-name {
 		font-size: 30px;
 	}
-	.section-testimenials .carousel-caption {
+	.section-testimonials .carousel-caption {
 		background-color: rgba(255, 255, 255, 0.86);
 		right: 45%;
 		padding: 20px 25px;
 	}
 }
-
 @media (max-width: 768px) {
+	.small-header .heading {
+		font-size: 2.3rem;
+	}
 	.headerImage h1 {
 		font-size: 3rem;
 	}
 	.headerImage p {
 		font-size: 15px;
 	}
-	.section-testimenials .carousel-caption {
+	.section-testimonials .carousel-caption {
 		right: 10%;
 		left: 10%;
 		top: 0%;
@@ -313,8 +349,10 @@ body {
 		margin-top: 30px;
 	}
 }
-
 @media (max-width: 576px) {
+	.small-header .heading {
+		font-size: 1.6rem;
+	}
 	.section {
 		padding: 50px 0;
 	}
@@ -430,11 +468,12 @@ body {
 .section-faq .card{
 	margin-bottom: 5px;
 	border-radius: 0;
-	border: none;
+	border: 1px solid #efefef;
 	background-color: #fcfcfc;
 }
 .section-faq .card-header {
 	border-bottom: none;
+	padding: 0;
 }
 .section-faq .card-header button.btn-link:hover {
 	color: #037EF3;
@@ -447,9 +486,62 @@ body {
 .section-faq .card-header button.btn.btn-link {
 	white-space: normal;
 	text-align: left;
-	color: #1e1e1e;
 	font-weight: 600;
+	padding: 1.25rem 1.6rem;
+	width: 100%;
+	border-radius: 0;
+	transition: 0.2s all ease-in-out;
+}
+.section-faq .card-header button.btn.btn-link.collapsed {
+	color: #1e1e1e;
+	background-color: #f1f1f1;
+}
+.section-faq .card-header button.btn.btn-link {
+	color: #037EF3;
+	background-color: #efefef;
+}
+.section-faq .card-header button.btn-link.collapsed:hover {
+	color: #037EF3;
+	background-color: #efefef;
 }
 .section-faq .card-body {
-	padding: 1.25rem 2rem;
+	padding: 1.25rem 1.6rem;
+}
+#MCModel .badge-flag {
+	width: 20px;
+	height: 16px;
+	padding: 0;
+	margin: 0;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: transparent;
+	top: 0;
+	border-radius: 0;
+	margin-right: 0.2rem;
+}
+#MCModel .badge-flag.br {
+	background-image: url(https://cdn-expa.aiesec.org/assets/images/icons/nationalities/brazil.svg);
+}
+#MCModel .badge-flag.tr {
+	background-image: url(https://cdn-expa.aiesec.org/assets/images/icons/nationalities/turkey.svg);
+}
+#MCModel .badge-flag.eg {
+	background-image: url(https://cdn-expa.aiesec.org/assets/images/icons/nationalities/egypt.svg);
+}
+#MCModel .badge-flag.in {
+	background-image: url(https://cdn-expa.aiesec.org/assets/images/icons/nationalities/india.svg);
+}
+.body-partners {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+.partner-item {
+	color: #fff;
+	transition: 0.2s all ease-in-out;
+	margin: 6px;
+}
+.partner-item:hover {
+	box-shadow: 0 14px 24px -9px #bdbdbd;
 }
