@@ -22,10 +22,10 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<a href="./opportunities.php?p=1&mc=brazil" class="btn btn-info"><span class="badge badge-light badge-flag br"> </span> Brazil</a>
-						<a href="./opportunities.php?p=1&mc=egypt" class="btn btn-info"><span class="badge badge-light badge-flag eg"> </span> Egypt</a>
 						<a href="./opportunities.php?p=1&mc=turkey" class="btn btn-info"><span class="badge badge-light badge-flag tr"> </span> Turkey</a>
-						<a href="./opportunities.php?p=1&mc=india" class="btn btn-info"><span class="badge badge-light badge-flag in"> </span> India</a>
+						<a href="./opportunities.php?p=1&mc=egypt" class="btn btn-info"><span class="badge badge-light badge-flag eg"> </span> Egypt</a>
+						<a href="./opportunities.php?p=1&mc=brazil" class="btn btn-info"><span class="badge badge-light badge-flag br"> </span> Brazil</a>
+						<a href="./opportunities.php?p=1&mc=china" class="btn btn-info"><span class="badge badge-light badge-flag ch"> </span> China</a>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>

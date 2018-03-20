@@ -21,7 +21,7 @@
       <div class="col-xs-12 col-sm-6 col-md-3">
         <ul>
           <div class="title">Organizations</div>
-          <li><a target="_blank" href="https://www.aiesec.org/partners">Partner with us</a></li>
+          <li><a href="./partners.php">Partner with us</a></li>
           <li><a target="_blank" href="https://www.aiesec.org/global-volunteer-partner">Global Volunteer</a></li>
           <li><a target="_blank" href="https://www.aiesec.org/global-talent-partner">Global Talent</a></li>
           <li><a target="_blank" href="https://www.aiesec.org/global-entrepreneur-partner">Global Entrepreneur</a></li>

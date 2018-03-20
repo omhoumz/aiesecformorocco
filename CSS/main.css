@@ -441,6 +441,10 @@ body {
 	max-height: 68vh;
 	overflow: scroll;
 }
+.section-opportunities a.btn {
+	font-size: 1em;
+	margin-bottom: 12px;
+}
 .brand-label {
 	position: absolute;
 	top: 11px;
@@ -530,6 +534,9 @@ body {
 }
 #MCModel .badge-flag.in {
 	background-image: url(https://cdn-expa.aiesec.org/assets/images/icons/nationalities/india.svg);
+}
+#MCModel .badge-flag.ch {
+	background-image: url(https://cdn-expa.aiesec.org/assets/images/icons/nationalities/china_mainland.svg);
 }
 .body-partners {
 	display: flex;

@@ -60,7 +60,7 @@ include('../elts/small-header.php');
               <?php
                 foreach ($mcs as $k => $v) {
                   $link = '<a class="dropdown-item" href="./opportunities.php?p=1&mc='.$k.'">'. ucfirst($k) .'</a>';
-                  if ($k != 'morocco' && $k != $q_mc) {
+                  if ($k != 'morocco' && $k != 'india' && $k != $q_mc) {
                     echo $link;
                   }
                 }
